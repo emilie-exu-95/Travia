@@ -1,19 +1,7 @@
 <?php
 
-use Php\Ship;
+include("../config.php");
 
-require "../class/Ship.php";
-require "../scripts/imports.php";
-
-$ship = new Ship(1, 1, 1, 1, 1);
-echo $ship;
-
-$ships = import_ships("../data_files/ships.json");
-
-/*
-foreach ($ships as $ship) {
-    echo $ship . "\n";
-}
-*/
-
-?>
+$jsonShips = "https://tfressin.fr/cours/projet-travia-tour/ships.json";
+$jsonPlanets = "https://tfressin.fr/cours/projet-travia-tour/planets_details.json";
+import_ships($jsonShips);

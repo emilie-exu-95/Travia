@@ -2,14 +2,16 @@
 
 namespace Php;
 
-class Ship {
-    public $id;
-    public $name;
-    public $camp;
-    public $speed_kmh;
-    public $capacity;
+class Ship
+{
+    private int $id;
+    private string $name;
+    private string $camp;
+    private float $speed_kmh;
+    private int $capacity;
 
-    function __construct($id, $name, $camp, $speed_kmh, $capacity) {
+    function __construct($id, $name, $camp, $speed_kmh, $capacity)
+    {
         $this->id = $id;
         $this->name = $name;
         $this->camp = $camp;
@@ -17,7 +19,8 @@ class Ship {
         $this->capacity = $capacity;
     }
 
-    function __toString() {
-        echo "id: ".$this->id."\n"."name: ".$this->name."\n" . "camp: " . $this->camp . "\n" . "speed_kmh";
+    function __toString()
+    {
+        return "id: " . $this->id . "\n" . "name: " . $this->name . "\n" . "camp: " . $this->camp . "\n" . "speed_kmh: " . $this->speed_kmh . "\n" . "capacity: " . $this->capacity;
     }
 }
