@@ -8,11 +8,12 @@ class Planet
     private string $name;
     private string $image;
     private string $coord;
-    private float $x;
-    private float $y;
+    private int $x;
+    private int $y;
     private string $subGridCoord;
-    private string $subGridX;
-    private string $subGridY;
+    private float $subGridX;
+    private float $subGridY;
+    private string $sunName;
     private string $region;
     private string $sector;
     private int $suns;

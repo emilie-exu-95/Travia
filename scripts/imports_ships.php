@@ -22,9 +22,9 @@ function import_ships(string $json)
              VALUES (:id, :name, :camp, :speed_kmh, :capacity);"
         );
 
-        // Iterate json file to create ship
+        // Iterate json file to create ship (object)
         foreach ($jsonData as $shipData) {
-            // If ship is sucessfully created, proceed
+            // If ship is sucessfully created, valid data
             $ship = new Ship(
                 $shipData["id"],
                 $shipData["name"],
@@ -32,20 +32,23 @@ function import_ships(string $json)
                 $shipData["speed_kmh"],
                 $shipData["capacity"]
             );
-            // Bind parameters and execute
+            // Bind parameters and execute (data)
             $stmt->bindParam(":id", $shipData["id"], PDO::PARAM_INT);
             $stmt->bindParam(":name", $shipData["name"], PDO::PARAM_STR);
             $stmt->bindParam(":camp", $shipData["camp"], PDO::PARAM_STR);
             $stmt->bindParam(":speed_kmh", $shipData["speed_kmh"], PDO::PARAM_INT);
             $stmt->bindParam(":capacity", $shipData["capacity"], PDO::PARAM_INT);
             $stmt->execute();
+            // Set unused object reference to null for garbage collector
+            $ship = null;
         }
 
-        // Commit transaction
+        // Commit transaction + trigger garbage collection
         $dbh->commit();
+        gc_collect_cycles();
 
     } catch (PDOException $e) {
         $dbh->rollBack();
-        echo $e->getMessage();
+        echo "Error while importing ship to database : " . $e->getMessage();
     }
 }

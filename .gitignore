@@ -1,1 +1,6 @@
-  config.php
+config.php
+.idea/modules.xml
+.idea/php.xml
+.idea/vcs.xml
+idea/.gitignore
+.idea/Travia.iml

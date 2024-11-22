@@ -1,6 +1,8 @@
 <?php
 
-echo "Hello first!";
+echo "You there ?";
+
+print("Hello first!");
 
 include("../config.php");
 
@@ -10,7 +12,10 @@ $jsonPlanets = "https://tfressin.fr/cours/projet-travia-tour/planets_details.jso
 echo "Hello there!";
 
 try {
+
     import_ships($jsonShips);
+    import_planets($jsonPlanets);
+
 } catch (PDOException $e) {
     echo e->getMessage();
 }
