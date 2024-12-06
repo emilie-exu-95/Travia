@@ -1,0 +1,26 @@
+.vertical-alignment {
+    display: flex;
+    flex-direction: column;
+}
+
+.horizontal-alignment {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical-center {
+    display: flex;
+    justify-content: center;
+}
+
+.horizontal-center {
+    display: flex;
+    align-items: center;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

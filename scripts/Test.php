@@ -1,9 +1,5 @@
 <?php
 
-echo "You there ?";
-
-print("Hello first!");
-
 include("../config.php");
 
 $jsonShips = "https://tfressin.fr/cours/projet-travia-tour/ships.json";
