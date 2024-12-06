@@ -4,7 +4,7 @@
 :root {
     --white: rgba(255, 255, 255, 0.8);
     --black: rgb(0, 0, 0, 0.8);
-    --blue: #3f37c9;
+    --blue: #3d58b9;
     --pink: #b43e8f;
     --purple: #6200b3;
 }
@@ -19,12 +19,30 @@
     );
 }
 
+html, body {
+    height: 100%;
+    width: 100%;
+    background-image: url("https://img.goodfon.com/original/1920x1080/0/b5/nebula-galaxy-stars-colors.jpg");
+    background-position: fixed;
+    background-size: cover;
+    backdrop-filter: blur(5px);
+    color: var(--white);
+    overflow: hidden;
+}
+
+/*WINDOW FRAME (over background)*/
+.window {
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(5px) brightness(0.8);
+}
+
 /*FORM COMPONENTS*/
 input {
     padding: 7px 15px;
     border-radius: 3px;
     border: solid 1px var(--white);
-    background-color: rgb(0,0,0,0);
+    background-color: transparent;
     color: white;
 }
 
@@ -34,6 +52,7 @@ input[type=text]:focus {
 }
 input[type=text]:focus + label {
     color: var(--pink);
+    font-weight: bold;
 }
 
 .input-bloc {
@@ -41,15 +60,45 @@ input[type=text]:focus + label {
     gap: 5px;
 }
 
+/*BUTTON*/
 button[type=submit] {
-    margin: 10% 0;
+    margin: 5% 0;
     color: white;
     font-weight: bold;
     border: none;
 }
 
 button:hover {
-    color: none;
     transition: 0.05s ease-in-out;
     filter: brightness(0.7);
+}
+
+button.update-button {
+    font-weight: normal;
+    border-radius: 20px;
+    border: solid 0.5px var(--white);
+    color: var(--white);
+}
+
+button.update-button:hover {
+    filter: brightness(1);
+    border: solid 0.5px var(--white);
+    background-color: var(--blue);
+}
+
+/*HORIZONTAL LINE + WORDS IN MIDDLE*/
+.separator-line-text {
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.separator-line-text::before, .separator-line-text::after {
+    content: "";
+    height: 0.5px;
+    width: 80px;
+    display: block;
+    background-color: white;
 }
