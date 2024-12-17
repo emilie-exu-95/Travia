@@ -14,7 +14,7 @@ function import_ships(string $json)
         $dbh->beginTransaction();
 
         // Empty table before filling
-        $dbh->execute("TRUNCATE TABLE ship;");
+        $dbh->execute("TRUNCATE TABLE TRAVIA_Ship;");
 
         // Prepare statement for insert
         $stmt = $dbh->prepare(

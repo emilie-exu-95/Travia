@@ -12,7 +12,7 @@ function import_planets(string $json)
         $dbh->beginTransaction();
 
         // Empty table before filling
-        $dbh->execute("TRUNCATE TABLE planet;");
+        $dbh->execute("TRUNCATE TABLE TRAVIA_Planet;");
 
         // Prepare statement for insert
         $stmt = $dbh->prepare(
