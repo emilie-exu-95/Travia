@@ -86,6 +86,10 @@ button.update-button:hover {
     background-color: var(--blue);
 }
 
+button:focus {
+    filter: brightness(0.7);
+}
+
 /*HORIZONTAL LINE + WORDS IN MIDDLE*/
 .separator-line-text {
     display: flex;

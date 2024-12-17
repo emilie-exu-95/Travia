@@ -35,9 +35,9 @@ function import_planets(string $json)
                 $planetData["Sector"],
                 $planetData["Suns"],
                 $planetData["Moons"],
-                $planetData["Position"];
-                $planetData["Distance"];
-                $planetData["LengthDay"];
+                $planetData["Position"],
+                $planetData["Distance"],
+                $planetData["LengthDay"],
                 $planetData["LengthYear"],
                 $planetData["Diameter"],
                 $planetData["Gravity"]
