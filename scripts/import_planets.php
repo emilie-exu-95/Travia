@@ -1,27 +1,39 @@
 <?php
 
-include("../config.php");
+use Travia\Classes\Planet;
+require_once "../class/Planet.php";
 
 function import_planets(string $json)
 {
-    global $dbh;
+    $count = 1;
+
+    // TODO
+    // Import data from json file, NOT WORKING: files too large
     $jsonData = json_decode(file_get_contents($json), true);
 
+    // Connection to database
+    include("../connection.php");
+
     try {
+        // Connection to database
+        include("../connection.php");
+
         // Begin transaction
         $dbh->beginTransaction();
 
         // Empty table before filling
-        $dbh->execute("TRUNCATE TABLE TRAVIA_Planet;");
+        $dbh->exec("TRUNCATE TABLE TRAVIA_Planet;");
 
         // Prepare statement for insert
         $stmt = $dbh->prepare(
-            "INSERT INTO planet (id, name, coord, x, y, subGridCoord, subGridX, subGridY, sunName region, sector, suns, moons, position, distance, dayLength, yearLength, diameter, gravity)
-             VALUES (:id, :name, :coord, :x, :y, :subGridCoord, :subGridX, :subGridY, :sunName, regions, :sector, :suns, :moons, :position, :distance, :dayLength, :yearLeangth, :diameter, :gravity);"
+            "INSERT INTO TRAVIA_Planet (id, name, coord, x, y, subGridCoord, subGridX, subGridY, sunName region, sector, suns, moons, position, distance, dayLength, yearLength, diameter, gravity)
+             VALUES (:id, :name, :coord, :x, :y, :subGridCoord, :subGridX, :subGridY, :sunName, :region, :sector, :suns, :moons, :position, :distance, :dayLength, :yearLeangth, :diameter, :gravity);"
         );
 
         // Iterate json file to create planet (object)
         foreach ( $jsonData as $planetData ) {
+            echo $count . '\n';
+            $count++;
             // If planet is successfully created, valid data
             $planet = new Planet(
                 $planetData["Id"],
@@ -50,7 +62,7 @@ function import_planets(string $json)
             $stmt->bindParam(":x", $planetData["X"], PDO::PARAM_INT);
             $stmt->bindParam(":y", $planetData["Y"], PDO::PARAM_INT);
             $stmt->bindParam(":subGridCoord", $planetData["SubGridCoord"], PDO::PARAM_STR);
-            $stmt->bindParam(":subGridX", $planetData["SubGridY"], PDO::PARAM_STR);  // Treated as float
+            $stmt->bindParam(":subGridX", $planetData["SubGridX"], PDO::PARAM_STR);  // Treated as float
             $stmt->bindParam(":subGridY", $planetData["SubGridY"], PDO::PARAM_STR); // Treated as float
             $stmt->bindParam(":sunName", $planetData["SunName"], PDO::PARAM_STR);
             $stmt->bindParam(":region", $planetData["Region"], PDO::PARAM_STR);

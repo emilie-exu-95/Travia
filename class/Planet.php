@@ -1,6 +1,6 @@
 <?php
 
-namespace Php;
+namespace Travia\Classes;
 
 class Planet
 {

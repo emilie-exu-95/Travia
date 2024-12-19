@@ -14,7 +14,7 @@
 
 </head>
 
-<?php include("header"); ?>
+<?php include("../header.html"); ?>
 
 <body>
 
@@ -50,8 +50,8 @@
                 <h5 class="separator-line-text">Imports</h5>
 
                 <form class="vertical-alignment" action="../scripts/update_button.php" method="post">
-                    <button class="btn update-button" type="submit" action="update" value="update-planets">Update Planets</button>
-                    <button class="btn update-button" type="submit" action="update" value="update-ships">Update Ships</button>
+                    <button class="btn update-button" type="submit" name="update" value="update-planets">Update Planets</button>
+                    <button class="btn update-button" type="submit" name="update" value="update-ships">Update Ships</button>
                 </form>
             </div>
 

@@ -1,7 +1,6 @@
 <?php
 
-namespace Php;
-
+namespace Travia\Classes;
 class Ship
 {
     private int $id;
