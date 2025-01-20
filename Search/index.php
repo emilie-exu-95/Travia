@@ -122,16 +122,13 @@ include("handle_planets.php");
             <!-- RETRIEVE PLANET DATA -->
             <?php
             include("../utils/connection.php");
-            $query = "SELECT name, image, coord, x, y, region, sector from TRAVIA_Planet;";
+            $query = "SELECT name, image, coord, x, y, subGridX, subGridY, region, sector from TRAVIA_Planet;";
             $result = $dbh->query($query);
             while ( $line = $result->fetch(PDO::FETCH_OBJ) ) {
                 $name = $line->name;
-                //$image = $line->image
-                $x = $line->x;
-                $Y = $line->y;
+                $x = ($line->x + $line->subGridX) * 6;
+                $Y = ($line->y + $line->subGridY) * 6;
                 $region = $line->region;
-
-                // Other values
                 $radius = 1; // temporary
 
                 //Add planet to map

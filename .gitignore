@@ -1,4 +1,4 @@
-config.php
+utils/config.php
 .idea/modules.xml
 .idea/php.xml
 .idea/vcs.xml
