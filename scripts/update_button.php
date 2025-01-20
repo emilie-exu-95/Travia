@@ -12,18 +12,16 @@
         switch ($update) {
             case "update-planets":
                 import_planets($jsonPlanets);
-                echo "Planets succesfully updated.<br>";
                 break;
             case "update-ships":
                 import_ships($jsonShips);
-                echo "Ships successfully updated.<br>";
                 break;
             default:
-                echo "Invalid action specified.<br>";
+                echo "<br>Invalid action specified.<br>";
                 break;
         }
     } else {
-        echo "No action specified.<br>";
+        echo "<br>No action specified.<br>";
     }
 
-    echo "Execution time in seconds : " . (microtime(true) - $time_start);
+    echo "<br>Execution time in seconds : " . (microtime(true) - $time_start);

@@ -5,19 +5,24 @@ require_once "../class/Planet.php";
 
 function import_planets(string $json)
 {
-    $count = 1;
-
-    // TODO
-    // Import data from json file, NOT WORKING: files too large
-    $jsonData = json_decode(file_get_contents($json), true);
-
     // Connection to database
-    include("../connection.php");
+    include("../utils/connection.php");
+
+    echo "here";
+
+    // Import data from json file
+    //$jsonData = json_decode(file_get_contents($json), true);
+
+    $jsonContent = file_get_contents($json);
+
+    echo "<br>jsonContent ";
+
+    // SOMEHOW NOT WORKING HERE
+    $jsonData = json_decode($jsonContent, true);
+
+    echo "<br>jsonData<br>";
 
     try {
-        // Connection to database
-        include("../connection.php");
-
         // Begin transaction
         $dbh->beginTransaction();
 
@@ -26,14 +31,16 @@ function import_planets(string $json)
 
         // Prepare statement for insert
         $stmt = $dbh->prepare(
-            "INSERT INTO TRAVIA_Planet (id, name, coord, x, y, subGridCoord, subGridX, subGridY, sunName region, sector, suns, moons, position, distance, dayLength, yearLength, diameter, gravity)
-             VALUES (:id, :name, :coord, :x, :y, :subGridCoord, :subGridX, :subGridY, :sunName, :region, :sector, :suns, :moons, :position, :distance, :dayLength, :yearLeangth, :diameter, :gravity);"
+            "INSERT INTO TRAVIA_Planet (id, name, image, coord, x, y, subGridCoord, subGridX, subGridY, sunName, region, sector, suns, moons, position, distance, dayLength, yearLength, diameter, gravity)
+             VALUES (:id, :name, :image, :coord, :x, :y, :subGridCoord, :subGridX, :subGridY, :sunName, :region, :sector, :suns, :moons, :position, :distance, :dayLength, :yearLength, :diameter, :gravity);"
         );
 
-        // Iterate json file to create planet (object)
-        foreach ( $jsonData as $planetData ) {
-            echo $count . '\n';
-            $count++;
+        $count = 0;
+
+        echo "one";
+        // Iterate over JSON file
+        foreach ($jsonData as $planetData) {
+
             // If planet is successfully created, valid data
             $planet = new Planet(
                 $planetData["Id"],
@@ -42,6 +49,9 @@ function import_planets(string $json)
                 $planetData["Coord"],
                 $planetData["X"],
                 $planetData["Y"],
+                $planetData["SubGridCoord"],
+                $planetData["SubGridX"],
+                $planetData["SubGridY"],
                 $planetData["SunName"],
                 $planetData["Region"],
                 $planetData["Sector"],
@@ -54,10 +64,21 @@ function import_planets(string $json)
                 $planetData["Diameter"],
                 $planetData["Gravity"]
             );
+
+            // Counter
+            $count++;
+            if ( $count%50 == 0 ) {
+                echo "<br>";
+            }
+            echo $count . " ";
+
+            // Set values if null
+            $image = $planetData["Image"] ?? "";
+
             // Bind parameters and execute (data)
             $stmt->bindParam(":id", $planetData["Id"], PDO::PARAM_INT);
             $stmt->bindParam(":name", $planetData["Name"], PDO::PARAM_STR);
-            $stmt->bindParam(":image", $planetData["Image"], PDO::PARAM_STR);
+            $stmt->bindParam(":image", $image, PDO::PARAM_STR);
             $stmt->bindParam(":coord", $planetData["Coord"], PDO::PARAM_STR);
             $stmt->bindParam(":x", $planetData["X"], PDO::PARAM_INT);
             $stmt->bindParam(":y", $planetData["Y"], PDO::PARAM_INT);
@@ -75,16 +96,36 @@ function import_planets(string $json)
             $stmt->bindParam(":yearLength", $planetData["LengthYear"], PDO::PARAM_INT);
             $stmt->bindParam(":diameter", $planetData["Diameter"], PDO::PARAM_INT);
             $stmt->bindParam(":gravity", $planetData["Gravity"], PDO::PARAM_INT);
-            // Set unused object reference to null for garbage collector
+            $stmt->execute();
+
+            // Set unused object reference to null for garbage collection
             $planet = null;
         }
 
         // Commit transaction + trigger garbage collection
         $dbh->commit();
+        echo "<br>Planets succesfully updated.<br>";
         gc_collect_cycles();
 
-    } catch (PDOException $e) {
+        // Create file that will contain all planet names for searching purposes
+        /*
+        try {
+            $planetFile = fopen("../files/planetsList.txt", "w");
+            echo "Planets list update ongoing.<br>";
+            $result = $dbh->query("SELECT name FROM TRAVIA_Planet;");
+            while ( $line = $result->fetch(PDO::FETCH_OBJ) ) {
+                fwrite($planetFile, $line->name . "\n");
+            }
+            fclose($planetFile);
+            echo "Planets list succesfully updated.<br>"
+        } catch (Exception $e) {
+            echo "Echo while writing in file : " . $e->getMessage();
+        }
+        */
+
+
+    } catch (Exception $e) {
         $dbh->rollBack();
-        echo "Error while importing planet to database : " . $e->getMessage();
+        echo "Error while importing planets to database : " . $e->getMessage();
     }
 }

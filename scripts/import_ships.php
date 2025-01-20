@@ -5,13 +5,11 @@ require_once "../class/Ship.php";
 
 function import_ships(string $json)
 {
+    // Connection to database
+    include("../utils/connection.php");
+
     // Import data from json file
     $jsonData = json_decode(file_get_contents($json), true);
-
-    // Connection to database
-    include("../connection.php");
-
-    $count = 1;
 
     try {
         // Begin transaction
@@ -26,10 +24,9 @@ function import_ships(string $json)
              VALUES (:id, :name, :camp, :speed_kmh, :capacity);"
         );
 
+        $count = 0;
         // Iterate json file to create ship (object)
         foreach ($jsonData as $shipData) {
-            echo $count . " ";
-            $count++;
             // If ship is sucessfully created, valid data
             $ship = new Ship(
                 $shipData["id"],
@@ -38,6 +35,14 @@ function import_ships(string $json)
                 $shipData["speed_kmh"],
                 $shipData["capacity"]
             );
+
+            // Counter
+            $count++;
+            if ( $count%50 == 0 ) {
+                echo "<br>";
+            }
+            echo $count . " ";
+
             // Bind parameters and execute (data)
             $stmt->bindParam(":id", $shipData["id"], PDO::PARAM_INT);
             $stmt->bindParam(":name", $shipData["name"], PDO::PARAM_STR);
@@ -52,10 +57,11 @@ function import_ships(string $json)
 
         // Commit transaction + trigger garbage collection
         $dbh->commit();
+        echo "<br>Ships successfully updated.<br>";
         gc_collect_cycles();
 
-    } catch (PDOException $e) {
+    } catch (Exception $e) {
         $dbh->rollBack();
-        echo "Error while importing ship to database : " . $e->getMessage();
+        echo "Error while importing ships to database : " . $e->getMessage();
     }
 }
