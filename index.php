@@ -9,7 +9,7 @@
 
     <title>Travia</title>
     <link rel="icon" type="image/x-icon" href="">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="search/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="  crossorigin=""></script>
@@ -45,7 +45,7 @@ include("handle_planets.php");
             </div>
 
             <!-- FORM (origin, destination)-->
-            <form class="vertical-alignment" method="post" action="handle_planets.php">
+            <form class="vertical-alignment" method="post" action="search/handle_planets.php">
                 <!-- origin input-->
                 <div class="input-bloc vertical-alignment text-light mb-3">
                     <input name="origin" type="text" id="origin" placeholder="e.g. Alderaan" required>
@@ -159,7 +159,7 @@ include("handle_planets.php");
 </body>
 
 <footer>
-    <script src="../scripts.js"></script>
+    <script src="scripts.js"></script>
 </footer>
 
 </html>

@@ -5,6 +5,10 @@
     letter-spacing: 0.07rem;
 }
 
+.hidden {
+    display: none;
+}
+
 .vertical-alignment {
     display: flex;
     flex-direction: column;

@@ -14,7 +14,7 @@
             break;
         }
 
-        // Search planets in file
+        // search planets in file
         $originFound = false;
         $destinationFound = false;
         while ( ($line=fgets($planetsList)) !== false ) {
