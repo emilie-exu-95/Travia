@@ -80,7 +80,7 @@
             <!-- Password -->
             <div class="input-bloc vertical-alignment text-light mb-3">
 
-                <!-- Password info -->
+                <!-- Password info, checklist -->
                 <ul class="pass-checklist">
                     <li class="pass-info">A least 12 characters long</li>
                     <li class="pass-info">A least 1 number</li>
@@ -88,6 +88,9 @@
                     <li class="pass-info">A least 1 uppercase</li>
                     <li class="pass-info">A least 1 special character</li>
                 </ul>
+
+                <!-- Password suggestion -->
+                <p class="pass-suggestion hidden w-80">The password is <span id="pass-strength"></span><span id="suggestion"></span></p>
 
                 <!-- Password input -->
                 <input name="pass" type="password" minlength="12" id="pass" placeholder="e.g. a9827pkgRcdlTQf" required>
@@ -103,12 +106,9 @@
             </div>
 
             <!-- CAPTCHA -->
-            <div>
-
-            </div>
 
             <!-- Submit -->
-            <button type="submit" class="blue-pink-gradient btn">Create my account</button>
+            <button type="submit" class="mb-2 blue-pink-gradient btn">Create my account</button>
 
 
 
