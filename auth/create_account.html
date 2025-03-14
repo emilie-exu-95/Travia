@@ -13,25 +13,54 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
 
+    <!-- Google reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("demo-form").submit();
+        }
+    </script>
+
+    <!-- FORM INPUTS + INPUT ERRORS -->
+    <?php include("handle_creation.php"); ?>
+
 </head>
 
 <body class="center">
 
     <div class="form-div">
 
+        <!-- Error indications for failed submission -->
+        <div class="submit-error text-danger ">
+            <ul class="small-list">
+                <li class="small-list-item text-danger">hey</li>
+                <li class="small-list-item">hey</li>
+                <?php
+                    // Display error messages according to user mistakes
+                    // $submitErrors is a list of errors fond upon submission
+                    switch($submitErrors) {
+
+                    }
+                ?>
+            </ul>
+        </div>
+
         <h3>Create an account</h3>
 
         <hr>
 
         <!-- FORM -->
-        <form class="vertical-alignment" method="post" action="handle_creation.php">
+        <form class="vertical-alignment" method="post" action="handle_account_creation.php">
 
             <!-- FIRST NAME + LAST NAME -->
             <div class="row">
 
                 <!-- First name -->
                 <div class="col input-bloc vertical-alignment text-light mb-3">
-                    <input name="fname" type="text" id="fname" placeholder="e.g. Jane" required>
+                    <?php
+                        echo "<input name='fname' type='text' id='fname' placeholder='e.g. Jane Doe' value=$fname>
+                    ?>
+                    <input name="fname" type="text" id="fname" placeholder="e.g. Jane" required>                   >
                     <label for="fname">First name</label>
                 </div>
 
@@ -81,16 +110,16 @@
             <div class="input-bloc vertical-alignment text-light mb-3">
 
                 <!-- Password info, checklist -->
-                <ul class="pass-checklist">
-                    <li class="pass-info">A least 12 characters long</li>
-                    <li class="pass-info">A least 1 number</li>
-                    <li class="pass-info">A least 1 lowercase</li>
-                    <li class="pass-info">A least 1 uppercase</li>
-                    <li class="pass-info">A least 1 special character</li>
+                <ul class="small-list">
+                    <li class="pl-1 small-list-item">At least 12 characters long</li>
+                    <li class="small-list-item">At least 1 number</li>
+                    <li class="small-list-item">At least 1 lowercase</li>
+                    <li class="small-list-item">At least 1 uppercase</li>
+                    <li class="small-list-item">At least 1 special character</li>
                 </ul>
 
                 <!-- Password suggestion -->
-                <p class="pass-suggestion hidden w-80">The password is <span id="pass-strength"></span><span id="suggestion"></span></p>
+                <p class="pass-suggestion w-80 invisible">The password is <span id="pass-strength" class="fw-bold"></span><span id="suggestion"></span></p>
 
                 <!-- Password input -->
                 <input name="pass" type="password" minlength="12" id="pass" placeholder="e.g. a9827pkgRcdlTQf" required>
@@ -101,24 +130,19 @@
                 </div>
 
                 <!-- Script for password -->
-                <script type="text/javascript" src="../utils/utils.js"></script>
+                <script type="text/javascript" src="../utils/password.js"></script>
 
             </div>
 
-            <!-- CAPTCHA -->
-
-            <!-- Submit -->
-            <button type="submit" class="mb-2 blue-pink-gradient btn">Create my account</button>
-
-
+            <!-- Submit + Captcha (local key)-->
+            <button type="submit" class="g-recaptcha mb-2 blue-pink-gradient btn"
+                    data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                    data-callback="onSubmit">Create my account
+            </button>
 
         </form>
     </div>
 
-    <!-- Relevent password indicators -->
-    <div class="pass-info hidden">
-
-    </div>
 
 </body>
 

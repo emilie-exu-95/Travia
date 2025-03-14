@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+global$dbh; <!DOCTYPE html>
 
 <html lang="en">
 
@@ -64,7 +64,7 @@ include("handle_planets.php");
             <?php
             if ( $planetsSet ) {
                 echo "<script>";
-                echo "document.getElementById('origin').value = " . $_COOKIE["origin"] ";";
+                echo "document.getElementById('origin').value = " . $_COOKIE["origin"] . ";";
                 echo "document.getElementById('destination').value = " . $_COOKIE["destination"] . ";";
                 echo "</script>";
             }
@@ -159,7 +159,7 @@ include("handle_planets.php");
 </body>
 
 <footer>
-    <script src="scripts.js"></script>
+
 </footer>
 
 </html>

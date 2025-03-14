@@ -3,9 +3,10 @@
 use Travia\Classes\Ship;
 require_once "../class/Ship.php";
 
-function import_ships(string $json)
+function import_ships(string $json): void
 {
     // Connection to database
+    global $dbh;
     include("../utils/connection.php");
 
     // Import data from json file
@@ -27,7 +28,7 @@ function import_ships(string $json)
         $count = 0;
         // Iterate json file to create ship (object)
         foreach ($jsonData as $shipData) {
-            // If ship is sucessfully created, valid data
+            // If ship is successfully created, valid data
             $ship = new Ship(
                 $shipData["id"],
                 $shipData["name"],

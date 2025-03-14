@@ -11,7 +11,6 @@
         $planetsList = fopen("../files/planetsList", "r");
         if ( !$planetsList ) {
             echo "Error: Failure to open file.<br>";
-            break;
         }
 
         // search planets in file
@@ -41,7 +40,7 @@
 
             // Set cookies
             $time = 60 * 5;
-            setcookie("origin", $origon, time() + $time);
+            setcookie("origin", $origin, time() + $time);
             setcookie("destination", $destination, time() + $time);
             echo "Cookies have been set.<br>";
 

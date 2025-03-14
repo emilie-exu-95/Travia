@@ -6,6 +6,7 @@ require_once "../class/Planet.php";
 function import_planets(string $json)
 {
     // Connection to database
+    global $dbh;
     include("../utils/connection.php");
 
     echo "here";
@@ -83,8 +84,8 @@ function import_planets(string $json)
             $stmt->bindParam(":x", $planetData["X"], PDO::PARAM_INT);
             $stmt->bindParam(":y", $planetData["Y"], PDO::PARAM_INT);
             $stmt->bindParam(":subGridCoord", $planetData["SubGridCoord"], PDO::PARAM_STR);
-            $stmt->bindParam(":subGridX", $planetData["SubGridX"], PDO::PARAM_STR);  // Treated as float
-            $stmt->bindParam(":subGridY", $planetData["SubGridY"], PDO::PARAM_STR); // Treated as float
+            $stmt->bindParam(":subGridX", $planetData["SubGridX"], PDO::PARAM_STR);  // processed as float
+            $stmt->bindParam(":subGridY", $planetData["SubGridY"], PDO::PARAM_STR); // processed as float
             $stmt->bindParam(":sunName", $planetData["SunName"], PDO::PARAM_STR);
             $stmt->bindParam(":region", $planetData["Region"], PDO::PARAM_STR);
             $stmt->bindParam(":sector", $planetData["Sector"], PDO::PARAM_STR);
@@ -104,24 +105,8 @@ function import_planets(string $json)
 
         // Commit transaction + trigger garbage collection
         $dbh->commit();
-        echo "<br>Planets succesfully updated.<br>";
+        echo "<br>Planets successfully updated.<br>";
         gc_collect_cycles();
-
-        // Create file that will contain all planet names for searching purposes
-        /*
-        try {
-            $planetFile = fopen("../files/planetsList.txt", "w");
-            echo "Planets list update ongoing.<br>";
-            $result = $dbh->query("SELECT name FROM TRAVIA_Planet;");
-            while ( $line = $result->fetch(PDO::FETCH_OBJ) ) {
-                fwrite($planetFile, $line->name . "\n");
-            }
-            fclose($planetFile);
-            echo "Planets list succesfully updated.<br>"
-        } catch (Exception $e) {
-            echo "Echo while writing in file : " . $e->getMessage();
-        }
-        */
 
 
     } catch (Exception $e) {

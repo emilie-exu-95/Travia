@@ -12,6 +12,10 @@
     display: none;
 }
 
+.invisible {
+    opacity: 0;
+}
+
 .vertical-alignment {
     display: flex;
     flex-direction: column;

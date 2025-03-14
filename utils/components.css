@@ -8,10 +8,11 @@
     --blue: #3d58b9;
     --pink: #b43e8f;
     --purple: #6200b3;
+    --small-font: 0.7em;
 }
 
 * {
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     color: var(--font-color);
 }
 
@@ -26,14 +27,14 @@
 }
 
 html, body {
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
     background-image: url("https://img.goodfon.com/original/1920x1080/0/b5/nebula-galaxy-stars-colors.jpg");
-    background-position: fixed;
+    background-position: center;
     background-size: cover;
     backdrop-filter: blur(5px);
     color: var(--white);
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 /*WINDOW FRAME (over background)*/
@@ -120,19 +121,18 @@ button:focus {
 }
 
 /* PASSWORD */
-.pass-checklist {
+.small-list {
     list-style: none;
     color: var(--white);
 }
 
-.pass-info {
-    padding-left: 30px;
-    font-size: 0.7em;
+.small-list-item {
+    font-size: var(--small-font);
 }
 
 .pass-info::before {
     content: "\f00d";
-    font-family: FontAwesome;
+    font-family: FontAwesome, sans-serif;
     color: var(--white);
     margin-right: 10px;
 }

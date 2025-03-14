@@ -1,6 +1,8 @@
 <?php
 
-    if( isset($_POST["fname"] && isset($_POST["lname"])) && isset($_POST["email"]) && isset($_POST["pass"]) ) {
+    if( isset($_POST["fname"]) && isset($_POST["lname"]) && isset($_POST["email"]) && isset($_POST["pass"]) ) {
 
+
+    } else {
 
     }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Footer</title>
+</head>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+    }
+    footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 0.8em;
+        color: white;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 0.5em 3em;
+        letter-spacing: 0.1em;
+        font-size: 0.8em;
+    }
+    img[alt="GitHub"] {
+        filter: invert(1);
+        height: 1.5em;
+    }
+</style>
+
+<body>
+
+    <?php
+        // Redirection to prevent access to this page
+        if (basename($SERVER["PHP_SELF"]) == "footer.php") {
+        header("Location: redirection.php");
+    ?>
+
+    <footer>
+        <a href="https://github.com/emilie-exu-95/Travia" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+        </a>
+        <p>View project</p>
+    </footer>
+
+
+</body>
+</html>

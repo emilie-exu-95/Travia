@@ -12,7 +12,7 @@ const hidePass = document.querySelector(".fa-eye-slash");
 showPass.addEventListener("click", () => {
     showPass.classList.toggle("fa-eye");
     showPass.classList.toggle("fa-eye-slash");
-    passInput.type = passInput.type == "password" ? "text" : "password";
+    passInput.type = passInput.type === "password" ? "text" : "password";
 })
 
 // VERIFY PASSWORD CONDITIONS, src : https://www.youtube.com/watch?v=Iss2ASrpl9s
@@ -20,7 +20,7 @@ const validationRegex = [
         { regex : /.{12,}/ }, // min length
         { regex : /[0-9]/ }, // numbers
         { regex : /[a-z]/ }, // lowercase letters
-        { regex : /[A-Z]/ }, // upppercse letters
+        { regex : /[A-Z]/ }, // uppercase letters
         { regex : /[^a-zA-Z0-9]/ } // special characters
 ]
 
@@ -47,13 +47,13 @@ const strengthColors = ["#FF4C4C", "#FF4C4C", "#FF9F40", "#3DDC97", "#00C853"];
 passInput.addEventListener("input", () => {
     let password = passInput.value;
     if ( !password ) { // Empty input
-        passSuggestion.classList.add("hidden");
+        passSuggestion.classList.add("invisible");
         passStrength.textContent = "";
         suggestion.textContent = "";
         return;
     }
     // Show suggestion at input
-    passSuggestion.classList.remove("hidden");
+    passSuggestion.classList.remove("invisible");
     let result = zxcvbn(password);
     passStrength.textContent = strengthLevels[result.score];
     passStrength.style.color = strengthColors[result.score]
@@ -64,3 +64,7 @@ passInput.addEventListener("input", () => {
     suggestion.textContent = string + result.feedback.suggestions;
 
 })
+
+// Redirection to prevent access to this page
+const currentFileName = window.location.pathname.split("/").pop();
+console.log(currentFileName);
