@@ -7,8 +7,8 @@ UTILS.JS CONTAINS
 // SHOW PASSWORD
 const passInput = document.getElementById("pass");
 const showPass = document.querySelector(".fa-eye");
-const hidePass = document.querySelector(".fa-eye-slash");
-
+const passChecklist = document.querySelectorAll("#pass-checklist .small-list-item");
+document.querySelector(".fa-eye-slash");
 showPass.addEventListener("click", () => {
     showPass.classList.toggle("fa-eye");
     showPass.classList.toggle("fa-eye-slash");
@@ -17,18 +17,18 @@ showPass.addEventListener("click", () => {
 
 // VERIFY PASSWORD CONDITIONS, src : https://www.youtube.com/watch?v=Iss2ASrpl9s
 const validationRegex = [
-        { regex : /.{12,}/ }, // min length
-        { regex : /[0-9]/ }, // numbers
-        { regex : /[a-z]/ }, // lowercase letters
-        { regex : /[A-Z]/ }, // uppercase letters
-        { regex : /[^a-zA-Z0-9]/ } // special characters
+        { regex: /.{12,}/ }, // min length
+        { regex: /[0-9]/ }, // number
+        { regex: /[a-z]/ }, // lowercase letter
+        { regex: /[A-Z]/ }, // uppercase letter
+        { regex: /[^a-zA-Z0-9]/ } // special character
 ]
-
-const passChecklist = document.querySelectorAll(".pass-info");
 
 passInput.addEventListener("keyup", () => {
     validationRegex.forEach((item, i) => {
         let isValid = item.regex.test(passInput.value);
+        console.log(item);
+        console.log(isValid);
 
         if( isValid ) {
             passChecklist[i].classList.add("checked");
@@ -64,7 +64,3 @@ passInput.addEventListener("input", () => {
     suggestion.textContent = string + result.feedback.suggestions;
 
 })
-
-// Redirection to prevent access to this page
-const currentFileName = window.location.pathname.split("/").pop();
-console.log(currentFileName);

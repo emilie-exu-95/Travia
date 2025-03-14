@@ -10,7 +10,6 @@ html, body {
 }
 
 .form-div {
-    box-sizing: border-box;
     border: solid 1px rgb(255, 255, 255, 0.5);
     padding: 30px 45px;
     border-radius: 20px;
@@ -24,3 +23,7 @@ html, body {
     overflow-wrap: normal;
 }
 
+input:focus + .space-between label {
+    color: var(--pink);
+    font-weight: bold;
+}

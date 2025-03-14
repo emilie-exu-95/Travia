@@ -22,13 +22,26 @@
         width: 100%;
         background-color: rgba(0, 0, 0, 0.5);
         padding: 0.5em 3em;
-        letter-spacing: 0.1em;
-        font-size: 0.8em;
     }
-    img[alt="GitHub"] {
-        filter: invert(1);
+    .footer-item {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        flex-direction: row;
+        gap: 0.8em;
+        font-size: 0.8em;
+        letter-spacing: 0.05em;
+        justify-content: center;
+        align-items: center;
+    }
+    .footer-icon {
         height: 1.5em;
     }
+
+    img[alt="GitHub"] {
+        filter: invert(1);
+    }
+
 </style>
 
 <body>
@@ -40,10 +53,13 @@
     ?>
 
     <footer>
-        <a href="https://github.com/emilie-exu-95/Travia" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+
+        <!-- GitHub -->
+        <a class="footer-item" href="https://github.com/emilie-exu-95/Travia" target="_blank">
+            <img class="footer-icon" src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub">
+            <p>View project</p>
         </a>
-        <p>View project</p>
+
     </footer>
 
 

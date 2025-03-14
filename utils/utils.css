@@ -8,6 +8,11 @@
     letter-spacing: 0.07rem;
 }
 
+/* FONT SIZE */
+.small-font-8 {
+    font-size: 0.8em;
+}
+
 .hidden {
     display: none;
 }
@@ -15,6 +20,13 @@
 .invisible {
     opacity: 0;
 }
+
+/* MARGINS */
+.ml-2 {
+    margin-left: 2em;
+}
+
+/* ALIGNMENTS */
 
 .vertical-alignment {
     display: flex;
@@ -47,4 +59,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+/* CONTRASTS DECORATIONS */
+.dark-text-shadow {
+    text-shadow: 0 3px 10px black;
 }

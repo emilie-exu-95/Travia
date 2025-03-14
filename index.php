@@ -1,5 +1,3 @@
-global$dbh; <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -121,7 +119,7 @@ include("handle_planets.php");
 
             <!-- RETRIEVE PLANET DATA -->
             <?php
-            include("../utils/connection.php");
+            require("utils/connection.php");
             $query = "SELECT name, image, coord, x, y, subGridX, subGridY, region, sector from TRAVIA_Planet;";
             $result = $dbh->query($query);
             while ( $line = $result->fetch(PDO::FETCH_OBJ) ) {
