@@ -9,17 +9,20 @@
     * {
         box-sizing: border-box;
         margin: 0;
+        padding: 0;
         font-family: Arial, sans-serif;
         font-weight: bold;
     }
     footer {
+        position: fixed;
+        width: 100vw;
+        bottom: 0;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         gap: 0.8em;
         color: white;
-        width: 100%;
         background-color: rgba(0, 0, 0, 0.5);
         padding: 0.5em 3em;
     }
@@ -31,13 +34,10 @@
         gap: 0.8em;
         font-size: 0.8em;
         letter-spacing: 0.05em;
-        justify-content: center;
-        align-items: center;
     }
     .footer-icon {
         height: 1.5em;
     }
-
     img[alt="GitHub"] {
         filter: invert(1);
     }
@@ -48,8 +48,9 @@
 
     <?php
         // Redirection to prevent access to this page
-        if (basename($SERVER["PHP_SELF"]) == "footer.php") {
-        header("Location: redirection.php");
+        if (basename($_SERVER["PHP_SELF"]) == "footer.php") {
+            header("Location: ../index.php");
+        }
     ?>
 
     <footer>

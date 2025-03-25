@@ -3,18 +3,20 @@
 use Travia\Classes\Ship;
 require_once "../class/Ship.php";
 
-function import_ships(string $json): void
+function import_ships(string $jsonFilePath): void
 {
     // Connection to database
     global $dbh;
     include("../utils/connection.php");
 
     // Import data from json file
-    $jsonData = json_decode(file_get_contents($json), true);
+    $jsonData = json_decode(file_get_contents($jsonFilePath), true);
+    if ($jsonData === null) {
+        echo "Error : invalid json file";
+        return;
+    }
 
     try {
-        // Begin transaction
-        $dbh->beginTransaction();
 
         // Empty table before filling
         $dbh->exec("TRUNCATE TABLE TRAVIA_Ship;");
@@ -38,31 +40,31 @@ function import_ships(string $json): void
             );
 
             // Counter
-            $count++;
-            if ( $count%50 == 0 ) {
+            if ($count%50 == 0) { // Jump a line every 50 entries
                 echo "<br>";
             }
-            echo $count . " ";
+            echo ++$count . " ";
 
-            // Bind parameters and execute (data)
-            $stmt->bindParam(":id", $shipData["id"], PDO::PARAM_INT);
-            $stmt->bindParam(":name", $shipData["name"], PDO::PARAM_STR);
-            $stmt->bindParam(":camp", $shipData["camp"], PDO::PARAM_STR);
-            $stmt->bindParam(":speed_kmh", $shipData["speed_kmh"], PDO::PARAM_INT);
-            $stmt->bindParam(":capacity", $shipData["capacity"], PDO::PARAM_INT);
+            // Bind values and execute
+            $stmt->bindValue(":id", $shipData["id"], PDO::PARAM_INT);
+            $stmt->bindValue(":name", $shipData["name"], PDO::PARAM_STR);
+            $stmt->bindValue(":camp", $shipData["camp"], PDO::PARAM_STR);
+            $stmt->bindValue(":speed_kmh", $shipData["speed_kmh"], PDO::PARAM_INT);
+            $stmt->bindValue(":capacity", $shipData["capacity"], PDO::PARAM_INT);
             $stmt->execute();
 
             // Set unused object reference to null for garbage collector
             $ship = null;
         }
 
-        // Commit transaction + trigger garbage collection
-        $dbh->commit();
         echo "<br>Ships successfully updated.<br>";
+
+        // Trigger garbage collection
         gc_collect_cycles();
 
     } catch (Exception $e) {
         $dbh->rollBack();
         echo "Error while importing ships to database : " . $e->getMessage();
     }
+
 }

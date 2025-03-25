@@ -1,5 +1,5 @@
 /*
-UTILS.JS CONTAINS
+PASSWORD.JS CONTAINS
     - Password eye toggle to show/hide value
     - Password validity
  */

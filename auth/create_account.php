@@ -39,7 +39,6 @@
                 <li class="small-list-item text-danger dark-text-shadow fw-bold">* These fields cannot be empty: First name, Last name, Email, Password.</li>
                 <li class="small-list-item text-danger dark-text-shadow fw-bold">* Firstname and Lastname can only contain letters.</li>
 
-                <!--
                 <?php
                     // Display error messages according to user mistakes
                     foreach($submitErrors as $errorCode) {
@@ -53,15 +52,15 @@
                         }
                     }
                 ?>
-                -->
+
             </ul>
         </div>
 
+        <!-- Title -->
         <div class="horizontal-alignment center space-between">
             <h3>Create an account</h3>
             <span class="small-font-8 m-0">*Required</span>
         </div>
-
 
         <hr>
 
@@ -73,49 +72,51 @@
 
                 <!-- First name -->
                 <div class="col input-bloc vertical-alignment text-light mb-3">
-
-                    <!--
                     <?php
-                        echo "<input name='fname' type='text' id='fname' placeholder='e.g. Jane Doe' value=$fname>"
+                        echo "<input name='fname' type='text' id='fname' placeholder='e.g. Jane' value=" . $fname . ">";
+                        echo "<label class='dark-text-shadow' for='fname''>First name*</label>";
                     ?>
-                    -->
-
-                    <input name="fname" type="text" id="fname" placeholder="e.g. Jane" required>
-                    <label class="dark-text-shadow" for="fname">First name*</label>
                 </div>
 
                 <!-- Last name -->
                 <div class="col input-bloc vertical-alignment text-light mb-3">
-                    <input name="lname" type="text" id="lname" placeholder="e.g. Doe" required>
-                    <label class="dark-text-shadow" for="lname">Last name*</label>
+                    <?php
+                        echo "<input name='lname' type='text' id='lname' placeholder='e.g. Doe' value=" . $lname . ">";
+                        echo "<label class='dark-text-shadow' for='lname'>Last name*</label>";
+                    ?>
                 </div>
+
             </div>
+
             <hr>
-            <!-- HOME AND WORK PLANETS -->
+
+            <!-- HOME/WORK PLANETS -->
             <div class="row">
+
                 <!-- Home planet -->
                 <div class="col input-bloc vertical-alignment text-light mb-3">
-                    <input name="home" type="text" id="home" placeholder="e.g. Alderaan" list="planetsList" required>
+                    <input list="planetsList" name="home" type="text" id="home" placeholder="e.g. Alderaan" required>
                     <label class="dark-text-shadow" for="home">Home planet</label>
                 </div>
 
                 <!-- Work planet -->
                 <div class="col input-bloc vertical-alignment text-light mb-3">
-                    <input name="work" type="text" id="work" placeholder="e.g. Alderaan" list="planetsList" required>
+                    <input list="planetsList" name="work" type="text" id="work" placeholder="e.g. Alderaan" required>
                     <label class="dark-text-shadow" for="work">Work planet</label>
                 </div>
 
-                <!-- Planets list -->
+                <!-- Planets list (data) -->
                 <datalist id="planetsList">
                     <!-- Create options wicdth planet names -->
                     <?php
                         include("../utils/connection.php");
                         $result = $dbh->query("SELECT name from TRAVIA_Planet;");
                         while( $line = $result->fetch(PDO::FETCH_OBJ) ) {
-                            echo "<option value=$line->name></option>";
+                            echo "<option value=" . $line->name . "></option>";
                         }
                     ?>
                 </datalist>
+
             </div>
 
             <hr>
@@ -166,6 +167,6 @@
 
 </body>
 
-<?php include("../utils/footer.html"); ?>
+<?php include("../utils/footer.php"); ?>
 
 </html>

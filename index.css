@@ -1,5 +1,5 @@
-@import url("../utils/utils.css");
-@import url("../utils/components.css");
+@import url("utils/utils.css");
+@import url("utils/components.css");
 
 form {
     color: var(--white);

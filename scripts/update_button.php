@@ -1,8 +1,12 @@
 <?php
 
-    include("import_planets.php");
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+global $jsonPlanets, $jsonShips;
+include("import_planets.php");
     include("import_ships.php");
-    include("variables.php");
+    include("variables.php"); // $jsonPlanets, $jsonShips
 
     $time_start = microtime(true);
     echo "Execution started and ongoing... <br>";

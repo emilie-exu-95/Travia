@@ -1,6 +1,14 @@
 /*COMPONENTS FOR TRAVIA PROJECT*/
 
-/*VARIABLES*/
+/* FONTS */
+@font-face {
+    font-family: Aurebesh;
+    src: url("../fonts/Aurebesh.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* VARIABLES */
 :root {
     --font-color: rgb(255, 255, 255, 0.9);
     --white: rgba(255, 255, 255, 0.8);
@@ -9,11 +17,16 @@
     --pink: #b43e8f;
     --purple: #6200b3;
     --small-font: 0.8em;
+    --main-font: Arial;
 }
 
 * {
-    font-family: Arial, sans-serif;
+    font-family: var(--main-font), sans-serif !important;
     color: var(--font-color);
+}
+
+.aurebesh {
+    --main-font: "Aurebesh", sans-serif;
 }
 
 .blue-pink-gradient {
@@ -37,14 +50,14 @@ html, body {
     overflow-x: hidden;
 }
 
-/*WINDOW FRAME (over background)*/
+/* WINDOW FRAME (over background) */
 .window {
     height: 100%;
     width: 100%;
     backdrop-filter: blur(5px) brightness(0.9);
 }
 
-/*FORM COMPONENTS*/
+/* FORM COMPONENTS */
 input {
     padding: 5px 15px;
     border-radius: 3px;
@@ -79,7 +92,7 @@ input:focus + .space-between label {
     gap: 0.15em;
 }
 
-/*BUTTON*/
+/* BUTTON */
 button[type=submit] {
     color: white;
     font-weight: bold;
@@ -108,7 +121,7 @@ button:focus {
     filter: brightness(0.7);
 }
 
-/*HORIZONTAL LINE + WORDS IN MIDDLE*/
+/* HORIZONTAL LINE + WORDS IN MIDDLE */
 .separator-line-text {
     display: flex;
     align-items: center;
