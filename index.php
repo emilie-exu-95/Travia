@@ -1,3 +1,32 @@
+<?php
+
+    session_start();
+
+    // If user is not logged in, redirect to login page
+    if (!isset($_SESSION['user'])) {
+        header("Location: login.php");
+    } else {
+
+        // Get default values for origin (home) and destination (work)
+        require "utils/config.php";
+        $stmt = $dbh->prepare("select home.name as home_planet, work.name as work_planet
+            from TRAVIA_User user
+            left join TRAVIA_Planet home on home.id = user.homePlanetId
+            left join TRAVIA_Planet work on work.id = user.workPlanetId
+            where user.id = :user_id;"
+        );
+        $stmt->bindParam(":user_id", $_SESSION['user'], PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Store values in session
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+        $_SESSION['home_planet'] = $result->home_planet;
+        $_SESSION['work_planet'] = $result->work_planet;
+    }
+
+?>
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -9,7 +38,7 @@
 
     <title>Travia</title>
     <link rel="icon" type="image/x-icon" href="">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-dpuaG1suU0eT09tx5plTaGMLBsfDLzUCCUXOY2j/LSvXYuG6Bqs43ALlhIqAJVRb" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="  crossorigin=""></script>
@@ -20,8 +49,8 @@
 
 <!-- If origin and destination are set, put them by default -->
 <?php
-    $origin = $_COOKIE["origin"] ?? "";
-    $destination = $_COOKIE["destination"] ?? "";
+    $origin = $_SESSION["home"] ?? "";
+    $destination = $_SESSION["work"] ?? "";
 ?>
 
 <div class="window horizontal-alignment horizontal-center vertical-center">
@@ -51,16 +80,15 @@
         </form>
 
         <!-- BUTTONS UPDATE PLANETS/SHIPS-->
-
+        <!--
         <div class="update-imports vertical-alignment horizontal-center">
             <h5 class="separator-line-text">Imports</h5>
-
             <form class="vertical-alignment" action="scripts/update_button.php" method="post">
                 <button class="btn update-button" type="submit" name="update" value="update-planets">Update Planets</button>
                 <button class="btn update-button" type="submit" name="update" value="update-ships">Update Ships</button>
             </form>
         </div>
-
+        -->
 
     </div>
 

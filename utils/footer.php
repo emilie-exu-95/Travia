@@ -11,9 +11,9 @@
         margin: 0;
         padding: 0;
         font-family: Arial, sans-serif;
-        font-weight: bold;
     }
     footer {
+        font-weight: bold;
         position: fixed;
         width: 100vw;
         bottom: 0;

@@ -1,5 +1,4 @@
-@import url("../utils/utils.css");
-@import url("../utils/components.css");
+@import url("components.css");
 
 * {
     margin: 0;
@@ -8,13 +7,37 @@
     letter-spacing: 0.07rem;
 }
 
-/* FONT SIZE */
+.red {
+    background: red;
+}
+
+a {
+    font-weight: bold;
+    color: white;
+    text-underline-offset: 0.2em;
+    width: fit-content;
+}
+
+a:visited {
+    color: white;
+}
+
+a:hover {
+    filter: brightness(0.5);
+}
+
+.small-a {
+    font-weight: lighter;
+    font-size: 0.8em;
+}
+
+/* FONT */
 .small-font-8 {
     font-size: 0.8em;
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .invisible {
@@ -24,6 +47,11 @@
 /* MARGINS */
 .ml-2 {
     margin-left: 2em;
+}
+
+/* WIDTH, HEIGHT */
+.w-100 {
+    width: 100%;
 }
 
 /* ALIGNMENTS */

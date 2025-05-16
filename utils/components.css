@@ -75,11 +75,11 @@ label {
     color: var(--font-color);
     text-transform: uppercase;
     font-size: 0.8em;
+    font-weight: bold;
 }
 
 input:focus + label {
     color: var(--pink);
-    font-weight: bold;
 }
 
 input:focus + .space-between label {
@@ -165,4 +165,18 @@ button:focus {
 .pass-suggestion {
     margin: 0;
     font-size: 0.8em;
+}
+
+.a-link {
+    color: var(--white);
+    font-weight: bold;
+}
+
+.small-bloc {
+    border: solid 1px rgb(255, 255, 255, 0.5);
+    padding: 30px 45px;
+    border-radius: 20px;
+    background-color: rgb(0, 0, 0, 0.7);
+    max-width: 650px;
+    width: 100%;
 }

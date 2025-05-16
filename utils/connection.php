@@ -1,19 +1,12 @@
 <?php
 
-global $servername, $dbname, $username, $password;
-require("config.php");
+use Travia\Classes\Database;
+require_once "../class/Database.php";
+require "config.php";
 
-try {
+static $dbh;
 
-    // Database connection
-    $dbh = new PDO("mysql:host=$servername; dbname=$dbname; charset=utf8", $username, $password);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-} catch (PDOException $e) {
-    echo "Error : " . $e->getMessage();
-}
-
-// Redirection to prevent access to this page
-if (basename($_SERVER["PHP_SELF"]) == "connection.php") {
-    header("Location: ../index.php");
+if (!isset($dbh)) {
+    $dbh = new Database($host, $dbname, $username, $password);
+    $dbh = $dbh->getConnection();
 }

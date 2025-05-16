@@ -5,31 +5,31 @@ PASSWORD.JS CONTAINS
  */
 
 // SHOW PASSWORD
-const passInput = document.getElementById("pass");
-const showPass = document.querySelector(".fa-eye");
-const passChecklist = document.querySelectorAll("#pass-checklist .small-list-item");
-document.querySelector(".fa-eye-slash");
-showPass.addEventListener("click", () => {
-    showPass.classList.toggle("fa-eye");
-    showPass.classList.toggle("fa-eye-slash");
-    passInput.type = passInput.type === "password" ? "text" : "password";
-})
+const passInput = document.getElementById("password");
+const showPass = document.querySelector(".eye-icon");
+const hidePass = document.querySelector(".slashed-eye-icon");
 
-// VERIFY PASSWORD CONDITIONS, src : https://www.youtube.com/watch?v=Iss2ASrpl9s
+function togglePassword() {
+    // Toggle password visibility
+    passInput.type = passInput.type === "password" ? "text" : "password";
+    // Toggle eye icon
+    showPass.classList.toggle("hidden");
+    hidePass.classList.toggle("hidden");
+}
+
+// VERIFY PASSWORD CONDITIONS
 const validationRegex = [
-        { regex: /.{12,}/ }, // min length
+        { regex: /.{12,}/ }, // min length, 12 characters
         { regex: /[0-9]/ }, // number
-        { regex: /[a-z]/ }, // lowercase letter
-        { regex: /[A-Z]/ }, // uppercase letter
+        { regex: /[a-z]/ }, // lowercase constter
+        { regex: /[A-Z]/ }, // uppercase constter
         { regex: /[^a-zA-Z0-9]/ } // special character
 ]
 
+const passChecklist = document.querySelectorAll("#pass-checklist .small-list-item");
 passInput.addEventListener("keyup", () => {
     validationRegex.forEach((item, i) => {
         let isValid = item.regex.test(passInput.value);
-        console.log(item);
-        console.log(isValid);
-
         if( isValid ) {
             passChecklist[i].classList.add("checked");
         } else {
@@ -38,7 +38,7 @@ passInput.addEventListener("keyup", () => {
     })
 })
 
-// VERIFY PASSWORD STRENGTH, not the best
+// VERIFY PASSWORD STRENGTH
 const passSuggestion = document.querySelector(".pass-suggestion");
 const passStrength = document.getElementById("pass-strength");
 const suggestion = document.getElementById("suggestion");

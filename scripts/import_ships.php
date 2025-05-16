@@ -46,11 +46,11 @@ function import_ships(string $jsonFilePath): void
             echo ++$count . " ";
 
             // Bind values and execute
-            $stmt->bindValue(":id", $shipData["id"], PDO::PARAM_INT);
-            $stmt->bindValue(":name", $shipData["name"], PDO::PARAM_STR);
-            $stmt->bindValue(":camp", $shipData["camp"], PDO::PARAM_STR);
-            $stmt->bindValue(":speed_kmh", $shipData["speed_kmh"], PDO::PARAM_INT);
-            $stmt->bindValue(":capacity", $shipData["capacity"], PDO::PARAM_INT);
+            $stmt->bindParam(":id", $shipData["id"], PDO::PARAM_INT);
+            $stmt->bindParam(":name", $shipData["name"], PDO::PARAM_STR);
+            $stmt->bindParam(":camp", $shipData["camp"], PDO::PARAM_STR);
+            $stmt->bindParam(":speed_kmh", $shipData["speed_kmh"], PDO::PARAM_INT);
+            $stmt->bindParam(":capacity", $shipData["capacity"], PDO::PARAM_INT);
             $stmt->execute();
 
             // Set unused object reference to null for garbage collector

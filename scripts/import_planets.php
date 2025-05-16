@@ -24,8 +24,8 @@ function import_planets(string $jsonFilePath)
     try {
 
         // Empty tables before filling
-        $dbh->exec("TRUNCATE TABLE TRAVIA_Planet;");
-        $dbh->exec("TRUNCATE TABLE TRAVIA_Trip;");
+        $dbh->exec("DELETE FROM TRAVIA_Planet;");
+        $dbh->exec("DELETE FROM TRAVIA_Trip;");
 
         // Prepare statement for insert
         $stmt = $dbh->prepare(
@@ -73,29 +73,30 @@ function import_planets(string $jsonFilePath)
             );
 
             // PLANET : Bind values + add planet to database
-            $stmt->bindValue(":id", $planetData["Id"], PDO::PARAM_INT);
-            $stmt->bindValue(":name", $planetData["Name"], PDO::PARAM_STR);
-            $stmt->bindValue(":image", $planetData["Image"], PDO::PARAM_STR);
-            $stmt->bindValue(":coord", $planetData["Coord"], PDO::PARAM_STR);
-            $stmt->bindValue(":x", $planetData["X"], PDO::PARAM_INT);
-            $stmt->bindValue(":y", $planetData["Y"], PDO::PARAM_INT);
-            $stmt->bindValue(":subGridCoord", $planetData["SubGridCoord"], PDO::PARAM_STR);
-            $stmt->bindValue(":subGridX", $planetData["SubGridX"], PDO::PARAM_STR);  // processed as float
-            $stmt->bindValue(":subGridY", $planetData["SubGridY"], PDO::PARAM_STR); // processed as float
-            $stmt->bindValue(":sunName", $planetData["SunName"], PDO::PARAM_STR);
-            $stmt->bindValue(":region", $planetData["Region"], PDO::PARAM_STR);
-            $stmt->bindValue(":sector", $planetData["Sector"], PDO::PARAM_STR);
-            $stmt->bindValue(":suns", $planetData["Suns"], PDO::PARAM_INT);
-            $stmt->bindValue(":moons", $planetData["Moons"], PDO::PARAM_INT);
-            $stmt->bindValue(":position", $planetData["Position"], PDO::PARAM_INT);
-            $stmt->bindValue(":distance", $planetData["Distance"], PDO::PARAM_INT);
-            $stmt->bindValue(":dayLength", $planetData["LengthDay"], PDO::PARAM_INT);
-            $stmt->bindValue(":yearLength", $planetData["LengthYear"], PDO::PARAM_INT);
-            $stmt->bindValue(":diameter", $planetData["Diameter"], PDO::PARAM_INT);
-            $stmt->bindValue(":gravity", $planetData["Gravity"], PDO::PARAM_INT);
+            $stmt->bindParam(":id", $planetData["Id"], PDO::PARAM_INT);
+            $stmt->bindParam(":name", $planetData["Name"], PDO::PARAM_STR);
+            $stmt->bindParam(":image", $planetData["Image"], PDO::PARAM_STR);
+            $stmt->bindParam(":coord", $planetData["Coord"], PDO::PARAM_STR);
+            $stmt->bindParam(":x", $planetData["X"], PDO::PARAM_INT);
+            $stmt->bindParam(":y", $planetData["Y"], PDO::PARAM_INT);
+            $stmt->bindParam(":subGridCoord", $planetData["SubGridCoord"], PDO::PARAM_STR);
+            $stmt->bindParam(":subGridX", $planetData["SubGridX"], PDO::PARAM_STR);  // processed as float
+            $stmt->bindParam(":subGridY", $planetData["SubGridY"], PDO::PARAM_STR); // processed as float
+            $stmt->bindParam(":sunName", $planetData["SunName"], PDO::PARAM_STR);
+            $stmt->bindParam(":region", $planetData["Region"], PDO::PARAM_STR);
+            $stmt->bindParam(":sector", $planetData["Sector"], PDO::PARAM_STR);
+            $stmt->bindParam(":suns", $planetData["Suns"], PDO::PARAM_INT);
+            $stmt->bindParam(":moons", $planetData["Moons"], PDO::PARAM_INT);
+            $stmt->bindParam(":position", $planetData["Position"], PDO::PARAM_INT);
+            $stmt->bindParam(":distance", $planetData["Distance"], PDO::PARAM_INT);
+            $stmt->bindParam(":dayLength", $planetData["LengthDay"], PDO::PARAM_INT);
+            $stmt->bindParam(":yearLength", $planetData["LengthYear"], PDO::PARAM_INT);
+            $stmt->bindParam(":diameter", $planetData["Diameter"], PDO::PARAM_INT);
+            $stmt->bindParam(":gravity", $planetData["Gravity"], PDO::PARAM_INT);
             $stmt->execute();
 
 
+            /*
             // TRIPS
             foreach ($planetData["trips"] as $day => $trip) {
 
@@ -111,14 +112,15 @@ function import_planets(string $jsonFilePath)
                     );
 
                     // TRIP : Bind values + add trip to database
-                    $stmt2->bindValue(":departurePlanet", $planetData["Id"], PDO::PARAM_INT);
-                    $stmt2->bindValue(":destinationPlanet", $tripData["destination_planet_id"][0], PDO::PARAM_INT);
-                    $stmt2->bindValue(":day", $day, PDO::PARAM_STR);
-                    $stmt2->bindValue(":time", $tripData["time"][0], PDO::PARAM_STR);
-                    $stmt2->bindValue(":ship", $tripData["ship_id"][0], PDO::PARAM_INT);
+                    $stmt2->bindParam(":departurePlanet", $planetData["Id"], PDO::PARAM_INT);
+                    $stmt2->bindParam(":destinationPlanet", $tripData["destination_planet_id"][0], PDO::PARAM_INT);
+                    $stmt2->bindParam(":day", $day, PDO::PARAM_STR);
+                    $stmt2->bindParam(":time", $tripData["time"][0], PDO::PARAM_STR);
+                    $stmt2->bindParam(":ship", $tripData["ship_id"][0], PDO::PARAM_INT);
                     $stmt2->execute();
                 }
             }
+            */
 
             // Set unused object reference to null for garbage collection
             $planetObject = null;
